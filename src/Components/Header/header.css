@@ -1,0 +1,64 @@
+@font-face {
+    font-family: Rammetto;
+    src: url(../Header/RammettoOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../Header/Lato-Bold.ttf);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 940px;
+    margin: 0 auto;
+}
+
+header {
+    height: 100px;
+}
+
+.bg-header {
+    background-color: #edeaeb;
+    border: solid 1px #edeaeb;
+}
+
+.logo {
+    width: 138px;
+    height: 25px;
+    color: #cb3362;
+    font-family: Rammetto;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: -0.16px;
+    text-transform: capitalize;
+    position: relative;
+    float: left;
+    margin-top: 35px;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    font-family: Lato;
+    text-transform: uppercase;
+    font-size: 18px;
+
+}
+
+.nav a {
+    text-decoration: none;
+    color: rosybrown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 35px 50px 35px 0;
+}
+
+.nav a:hover {
+    color: #cb3362;
+}

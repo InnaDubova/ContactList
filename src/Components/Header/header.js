@@ -3,12 +3,12 @@ import "../Header/header.css";
 
 const Header = () => {
     return(
-    <div class="container-fluid bg-header">
-    <header class="container">
-        <h1 class="logo">
+    <div className="container-fluid bg-header">
+    <header className="container">
+        <h1 className="logo">
             ContactList
         </h1>
-    <ul class="nav">
+    <ul className="nav">
         <li>
             <a href="#">home</a>
         </li>

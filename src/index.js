@@ -1,11 +1,12 @@
 import React, { Fragment,Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import {v4 as uuidv4 } from 'uuid';
 
 
 import Header from "./Components/Header/header";
 import Search from "./Components/Search/search";
-import ContactList from "./Components/ContactList/contactlist";
+import ContactList from "./Components/ContactList/contactList";
 import Footer from "./Components/Footer/footer";
 
 class App extends Component {
@@ -13,30 +14,70 @@ class App extends Component {
 state = {
   List:[
     {
-      "Avatar": "https://www.bootdey.com/img/Content/avatar/avatar3.png",
+      "Id": uuidv4(),
+      "Avatar": "76",
       "Name": "Mila Kunis",
       "Created": "2013/08/08",
       "Role": "Admin",
       "Status": "Inactive",
-      "Email": "mila@kunis.com"
+      "Email": "mila@kunis.com",
+      "Gender": "women"
     },
     {
-      "Avatar": "https://www.bootdey.com/img/Content/avatar/avatar2.png",
+      "Id": uuidv4(),
+      "Avatar": "41",
       "Name": "George Clooney",
       "Created": " 2013/08/12",
       "Role": "User",
       "Status": "Active",
-      "Email": "george@clooney.com"
+      "Email": "george@clooney.com",
+      "Gender": "men"
     },
     {
-      "Avatar": "https://www.bootdey.com/img/Content/avatar/avatar1.png",
+      "Id": uuidv4(),
+      "Avatar": "43",
       "Name": "Ryan Gossling",
       "Created": " 2004/01/24",
       "Role": "Moderator",
-      "Status": "Active",
-      "Email": "ryan@gossling.com"
+      "Status": "Pending",
+      "Email": "ryan@gossling.com",
+      "Gender": "men"
+    },
+    {
+      "Id": uuidv4(),
+      "Avatar": "20",
+      "Name": "Emma Watson",
+      "Created": " 2004/01/24",
+      "Role": "User",
+      "Status": "Banned",
+      "Email": "emma@watcom.com",
+      "Gender": "women"
     }
   ]
+}
+
+onStatusChange = (Id) => {
+  const index = this.state.List.findIndex((elem) => elem.Id === Id);   
+  let newList = this.state.List.slice();
+
+  if(newList[index].Status === "Inactive") {
+    newList[index].Status = "Active"
+  }
+  else if(newList[index].Status === "Active") {
+    newList[index].Status = "Pending"
+  }
+  else if(newList[index].Status === "Pending") {
+    newList[index].Status = "Banned"
+  }
+  else {
+    newList[index].Status = "Inactive"
+  }
+  this.setState(() => {
+    return{
+      List: newList
+    }
+  })
+
 }
 
 render(){
@@ -45,7 +86,7 @@ render(){
     <Fragment>
     <Header />
     <Search />
-    <ContactList List={List} />
+    <ContactList List={List} onStatusChange={this.onStatusChange} />
     <Footer />
     </Fragment>
     )

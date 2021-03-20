@@ -1,21 +1,25 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import Search from "../Search/search";
 import "../Header/header.css";
+
 
 const Header = () => {
     return(
     <div className="container-fluid bg-header">
     <header className="container">
-        <h1 className="logo">
+        <Link to="/" className="logo">
             ContactList
-        </h1>
+        </Link>
     <ul className="nav">
         <li>
-            <a href="#">home</a>
+            <Link to="/">home</Link>
         </li>
         <li>
-            <a href="./pages/about.html">add new contact</a>
+            <Link to="/add-contact">add new contact</Link>
         </li>
     </ul>
+    <Search />
     </header>
 </div>)
 }

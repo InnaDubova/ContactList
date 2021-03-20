@@ -1,0 +1,29 @@
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+.bootdey {
+    margin: 30px 0;
+}
+
+.form-horizontal {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 10%;
+}
+
+.form-control {
+    width: 130%;
+}
+
+.col-md-4 {
+    max-width: 25.333333%;
+}
+
+.col-lg-8 {
+    flex: 1 0 51.666667%;
+    max-width: 100.666667%;
+}
+
+.btn-info {
+    background-color: rosybrown;
+    border-color: rosybrown;
+}

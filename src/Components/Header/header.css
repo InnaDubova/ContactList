@@ -41,6 +41,11 @@ header {
     margin-top: 35px;
 }
 
+a:hover {
+    text-decoration: none;
+    color: rosybrown;
+}
+
 .nav {
     display: flex;
     justify-content: center;

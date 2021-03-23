@@ -27,3 +27,20 @@
     background-color: rosybrown;
     border-color: rosybrown;
 }
+
+.btn-info:hover {
+    background-color: #cb3362;
+    border-color: #cb3362;
+}
+
+.btn-info:not(:disabled):not(.disabled):active {
+    background-color: #cb3362;
+    border-color: #cb3362;
+    box-shadow: none;
+}
+
+.btn-info:focus {
+    background-color: #cb3362;
+    border-color: #cb3362;
+    box-shadow: none;
+}

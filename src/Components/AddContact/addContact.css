@@ -5,13 +5,12 @@
 }
 
 .form-horizontal {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     margin-left: 10%;
 }
 
 .form-control {
-    width: 130%;
+    width: 100%;
+
 }
 
 .col-md-4 {
@@ -26,6 +25,8 @@
 .btn-info {
     background-color: rosybrown;
     border-color: rosybrown;
+    display: flex;
+
 }
 
 .btn-info:hover {

@@ -1,6 +1,11 @@
-h2 {
+.mess {
     position: absolute;
     left: 30%;
     margin-top: 30px;
     color: rosybrown;
+}
+
+.content {
+    min-height: 100vh;
+    margin-bottom: -250px;
 }

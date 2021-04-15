@@ -2,17 +2,18 @@ import React,{ Fragment } from "react";
 import "../ContactList/contactList.css";
 import ContactItem from "./ContactItem/contactItem";
 
-const ContactList = ({List, onStatusChange, onDelete}) => {
+const ContactList = ({List, onStatusChange, onDelete,onEdit}) => {
     const item = List.map(contact => {
         return (
             <ContactItem key={contact.Id} Id={contact.Id} Avatar={contact.Avatar} Name={contact.Name} 
             Created={contact.Created} Role={contact.Role} Status={contact.Status} Email={contact.Email} 
             Gender={contact.Gender} onStatusChange={() => onStatusChange(contact.Id)}
-            onDelete={() => onDelete(contact.Id)} />
+            onDelete={() => onDelete(contact.Id)}
+            onEdit={() => onEdit(contact.Id)} />
         )
     })
     return(<Fragment>
-            <div className="container">
+            <div className="container content">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="main-box clearfix">
@@ -28,7 +29,7 @@ const ContactList = ({List, onStatusChange, onDelete}) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {item.length > 0 ? item: <h2>Contact list is empty</h2>}
+                                        {item.length > 0 ? item: <h2 className="mess">Contact list is empty</h2>}
                                     </tbody>
                                 </table>
                             </div>

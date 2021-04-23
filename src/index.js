@@ -11,6 +11,9 @@ import{
 
 import {v4 as uuidv4 } from 'uuid';
 
+import store from "./store";
+import { Provider } from "react-redux";
+
 
 import Header from "./Components/Header/header";
 import ContactList from "./Components/ContactList/contactList";
@@ -21,137 +24,136 @@ import EditContact from "./Components/EditContact/editContact";
 
 class App extends Component {
 
-state = {
-  List:[
-    {
-      "Id": uuidv4(),
-      "Avatar": "76",
-      "Name": "Mila Kunis",
-      "Created": "2013/08/08",
-      "Role": "Admin",
-      "Status": "Inactive",
-      "Email": "mila@kunis.com",
-      "Gender": "women"
-    },
-    {
-      "Id": uuidv4(),
-      "Avatar": "41",
-      "Name": "George Clooney",
-      "Created": " 2013/08/12",
-      "Role": "User",
-      "Status": "Active",
-      "Email": "george@clooney.com",
-      "Gender": "men"
-    },
-    {
-      "Id": uuidv4(),
-      "Avatar": "43",
-      "Name": "Ryan Gossling",
-      "Created": " 2004/01/24",
-      "Role": "Moderator",
-      "Status": "Pending",
-      "Email": "ryan@gossling.com",
-      "Gender": "men"
-    },
-    {
-      "Id": uuidv4(),
-      "Avatar": "20",
-      "Name": "Emma Watson",
-      "Created": " 2004/01/24",
-      "Role": "User",
-      "Status": "Banned",
-      "Email": "emma@watcom.com",
-      "Gender": "women"
-    }
-  ], 
-  currentContact: ""
-}
 
-onDelete = (Id) =>{
-  const index = this.state.List.findIndex((elem) => elem.Id === Id);
-  const partOne = this.state.List.slice(0,index);
-  const partTwo = this.state.List.slice(index + 1);
-  const newList = [...partOne, ...partTwo];
-  this.setState(() => {
-    return {
-      List: newList,
-    };
-  });
-}
 
-onEdit = (Id) =>{
-  const index = this.state.List.findIndex((elem) => elem.Id === Id);
-  const selectedContact = this.state.List[index];
-  this.setState({
-    currentContact: selectedContact
-  })
+// state = {
+//   List:[
+//     // {
+//     //   "Id": uuidv4(),
+//     //   "Avatar": "76",
+//     //   "Name": "Mila Kunis",
+//     //   "Created": "2013/08/08",
+//     //   "Role": "Admin",
+//     //   "Status": "Inactive",
+//     //   "Email": "mila@kunis.com",
+//     //   "Gender": "women"
+//     // },
+//     // {
+//     //   "Id": uuidv4(),
+//     //   "Avatar": "41",
+//     //   "Name": "George Clooney",
+//     //   "Created": " 2013/08/12",
+//     //   "Role": "User",
+//     //   "Status": "Active",
+//     //   "Email": "george@clooney.com",
+//     //   "Gender": "men"
+//     // },
+//     // {
+//     //   "Id": uuidv4(),
+//     //   "Avatar": "43",
+//     //   "Name": "Ryan Gossling",
+//     //   "Created": " 2004/01/24",
+//     //   "Role": "Moderator",
+//     //   "Status": "Pending",
+//     //   "Email": "ryan@gossling.com",
+//     //   "Gender": "men"
+//     // },
+//     // {
+//     //   "Id": uuidv4(),
+//     //   "Avatar": "20",
+//     //   "Name": "Emma Watson",
+//     //   "Created": " 2004/01/24",
+//     //   "Role": "User",
+//     //   "Status": "Banned",
+//     //   "Email": "emma@watcom.com",
+//     //   "Gender": "women"
+//     // }
+//   ], 
+//   currentContact: ""
+// }
 
-}
+// componentDidMount() {
+//   this.updateDatabase();
+// }
 
-onEditCurrentContact = (newContact) => {
-  const {Id} = newContact;
-  const index = this.state.List.findIndex((elem) => elem.Id === Id);
-  const partOne = this.state.List.slice(0,index);
-  const partTwo = this.state.List.slice(index + 1);
-  const newList = [...partOne,newContact, ...partTwo];
 
-  this.setState(() => {
-    return {
-      List: newList,
-    };
-  });
-}
+// onEdit = (Id) =>{
+//   const index = this.state.List.findIndex((elem) => elem.Id === Id);
+//   const selectedContact = this.state.List[index];
+//   this.setState({
+//     currentContact: selectedContact
+//   })
 
-onAddContact = (newContact) => {
-  const tmpList = this.state.List.slice();
-  const newList = [... tmpList, newContact];
-  this.setState(() => {
-    return {
-      List:newList
-    }
-  })
-}
+// }
 
-onStatusChange = (Id) => {
-  const index = this.state.List.findIndex((elem) => elem.Id === Id);   
-  let newList = this.state.List.slice();
+// onEditCurrentContact = (newContact) => {
+//   const {Id} = newContact;
+//   const index = this.state.List.findIndex((elem) => elem.Id === Id);
+//   const partOne = this.state.List.slice(0,index);
+//   const partTwo = this.state.List.slice(index + 1);
+//   const newList = [...partOne,newContact, ...partTwo];
 
-  if(newList[index].Status === "Inactive") {
-    newList[index].Status = "Active"
-  }
-  else if(newList[index].Status === "Active") {
-    newList[index].Status = "Pending"
-  }
-  else if(newList[index].Status === "Pending") {
-    newList[index].Status = "Banned"
-  }
-  else {
-    newList[index].Status = "Inactive"
-  }
-  this.setState(() => {
-    return{
-      List: newList
-    }
-  })
+//   this.setState(() => {
+//     return {
+//       List: newList,
+//     };
+//   });
+// }
 
-}
+// onAddContact = (newContact) => {
+//   const tmpList = this.state.List.slice();
+//   const newList = [... tmpList, newContact];
+//   this.setState(() => {
+//     return {
+//       List:newList
+//     }
+//   })
+//   this.saveData(newList)
+// }
+
+// onStatusChange = (Id) => {
+//   const index = this.state.List.findIndex((elem) => elem.Id === Id);   
+//   let newList = this.state.List.slice();
+
+//   if(newList[index].Status === "Inactive") {
+//     newList[index].Status = "Active"
+//   }
+//   else if(newList[index].Status === "Active") {
+//     newList[index].Status = "Pending"
+//   }
+//   else if(newList[index].Status === "Pending") {
+//     newList[index].Status = "Banned"
+//   }
+//   else {
+//     newList[index].Status = "Inactive"
+//   }
+//   this.setState(() => {
+//     return{
+//       List: newList
+//     }
+//   })
+
+// }
 
 render(){
-  const { List, currentContact } = this.state;
+  // const { List, currentContact } = this.state;
   return(
-    <Fragment>
+    <Provider store={store}>
         <Router>
         <Header />
           <Switch>
-            <Route path="/" exact render={() =>
-            <ContactList onEdit={this.onEdit} List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} />
-            <Route path="/add-contact" exact render={() => <AddContact onAddContact={this.onAddContact} />} />
-            <Route path="/editContact" exact render={() => <EditContact currentContact={currentContact} onEditCurrentContact={this.onEditCurrentContact} />} />
+            {/* <Route path="/" exact render={() =>
+            <ContactList onEdit={this.onEdit} List={List} onStatusChange={this.onStatusChange} onDelete={this.onDelete} />} /> */}
+            <Route path="/" exact component={ContactList} />
+            {/* <Route path="/add-contact" exact render={() => <AddContact onAddContact={this.onAddContact} />} /> */}
+            <Route path="/add-contact" exact component={AddContact} />
+            {/* <Route path="/editContact" exact render={() => <EditContact currentContact={currentContact} onEditCurrentContact={this.onEditCurrentContact} />} /> */}
+            <Route path="/editContact" exact component={EditContact} />
             <Route component = {NotFound} />
           </Switch>
           <Footer />
         </Router>
-    </Fragment>
+    </Provider>
     )
   }
 }

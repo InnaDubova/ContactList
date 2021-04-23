@@ -1,6 +1,10 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 import "../ContactItem/contactItem.css";
+
+import {deleteContact} from "../../../Actions/contactListActions";
+import { saveData } from "../../../Services/api-services";
 
     class ContactItem extends React.Component {
 
@@ -36,6 +40,18 @@ import "../ContactItem/contactItem.css";
         //         })
         //     }
         // }
+
+onDelete = () =>{
+    const {List} = this.props;
+    const index = List.findIndex((elem) => elem.Id === this.props.Id);
+    const partOne = List.slice(0,index);
+    const partTwo = List.slice(index + 1);
+    const newList = [...partOne, ...partTwo];
+    const {deleteContact} = this.props;
+    saveData(newList).then(() => {
+        deleteContact(newList);
+    })
+}
 
         render(){ 
             const { onStatusChange, onDelete,onEdit } = this.props;
@@ -92,7 +108,7 @@ import "../ContactItem/contactItem.css";
                     <a href="#" className="table-link danger">
                         <span className="fa-stack">
                             <i className="fa fa-square fa-stack-2x"></i>
-                            <i className="fa fa-trash-o fa-stack-1x fa-inverse" onClick={onDelete}></i>
+                            <i className="fa fa-trash-o fa-stack-1x fa-inverse" onClick={this.onDelete}></i>
                         </span>
                     </a>
                 </td>
@@ -101,4 +117,12 @@ import "../ContactItem/contactItem.css";
         }
 }
 
-export default ContactItem;
+const mapStateToProps = ({ContactListReducer}) => {
+    const {List} = ContactListReducer;
+    return{List}
+}
+const mapDispatchToProps = {
+    deleteContact
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (ContactItem);

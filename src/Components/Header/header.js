@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
 import Search from "../Search/search";
 import "../Header/header.css";
@@ -6,6 +6,7 @@ import "../Header/header.css";
 
 const Header = () => {
     return(
+        <Fragment>
     <div className="container-fluid bg-header">
     <header className="container">
         <Link to="/" className="logo">
@@ -21,7 +22,11 @@ const Header = () => {
     </ul>
     <Search />
     </header>
-</div>)
+</div>
+</Fragment>
+)
 }
+
+
 
 export default Header;

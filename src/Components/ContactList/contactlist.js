@@ -8,7 +8,7 @@ import ContactItem from "./ContactItem/contactItem";
 
 
 
-const ContactList = ({List, getAllContacts, currentList}) => {
+const ContactList = ({List,currentContact, getAllContacts, currentList}) => {
 
 useEffect(() => {
     updateDatabase().then(data => {
@@ -16,15 +16,18 @@ useEffect(() => {
     } )
 },[])
 
-    const item = List.map(contact => {
-        return (
-            <ContactItem key={contact.Id} Id={contact.Id} Avatar={contact.Avatar} Name={contact.Name} 
-            Created={contact.Created} Role={contact.Role} Status={contact.Status} Gender={contact.Gender} Email={contact.Email} />
-            //  onStatusChange={() => onStatusChange(contact.Id)}
-            // onDelete={() => onDelete(contact.Id)}
-            // onEdit={() => onEdit(contact.Id)} />
-        )
-    })
+    // if(currentContact.length === 0) {
+    //     const item = List.map(contact => {
+    //         return (
+    //             <ContactItem key={contact.Id} Id={contact.Id} Avatar={contact.Avatar} Name={contact.Name} 
+    //             Created={contact.Created} Role={contact.Role} Status={contact.Status} Gender={contact.Gender} Email={contact.Email} />
+    //             //  onStatusChange={() => onStatusChange(contact.Id)}
+    //             // onDelete={() => onDelete(contact.Id)}
+    //             // onEdit={() => onEdit(contact.Id)} />
+    //         )
+    //     })
+    // }
+    
     return(<Fragment>
             <div className="container content">
                 <div className="row">
@@ -42,7 +45,16 @@ useEffect(() => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {item.length > 0 ? item: <h2 className="mess">Contact list is empty</h2>}
+                                        {/* {item.length > 0 ? item: <h2 className="mess">Contact list is empty</h2>} */}
+                                        {currentContact.length === 0 ? List.map(contact => {
+                                            return (
+                                                <ContactItem key={contact.Id} {...contact} />
+                                            )
+                                        }) : currentContact.map(contact => {
+                                            return (
+                                                <ContactItem key={contact.Id} {...contact} />
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
@@ -55,8 +67,8 @@ useEffect(() => {
 }
 
 const mapStateToProps = ({ContactListReducer}) => {
-    const {List} = ContactListReducer;
-    return{List}
+    const {List,currentContact} = ContactListReducer;
+    return{List,currentContact}
 }
 const mapDispatchToProps = {
     getAllContacts

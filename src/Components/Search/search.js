@@ -1,15 +1,24 @@
-import React from "react";
+import React, {Fragment} from "react";
+import {connect} from "react-redux";
+import {searchContact} from "../../Actions/contactListActions"
 import "../Search/search.css";
 
-const Search = () => {
+const Search = ({searchContact}) => {
+  const onSearch = (event) => {
+    searchContact(event.target.value)
+  }
     return(
+      <Fragment>
           <div className="input-group">
-            <input type="text" className="form-control" placeholder="Search" name="search"/>
-            <div className="input-group-btn">
-              <button className="btn btn-default" type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
-            </div>
+            <input onChange={onSearch} type="search" className="form-control" placeholder="Search" name="search"/>
           </div>
+        </Fragment>    
       )
 }
 
-export default Search;
+
+const mapDispatchToProps = {
+  searchContact
+}
+
+export default connect(null,mapDispatchToProps) (Search);
